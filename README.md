@@ -1,7 +1,9 @@
 # Serilog.Sinks.ConductorTaskLog
 A serilog sink that sends task logs to [Netflix Conductor](https://github.com/Netflix/conductor).
 
+### Showcase
 
+![Showcase](images/example.png)
 
 ### Getting started
 #### With [conductor-dotnet-client](https://github.com/courosh12/conductor-dotnet-client)
