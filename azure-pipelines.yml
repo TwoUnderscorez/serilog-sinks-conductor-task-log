@@ -10,8 +10,20 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: 'src/Serilog.Sinks.ConductorTaskLog/Serolog.Sinks.ConductorTaskLog.csproj'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: 'src/Serilog.Sinks.ConductorTaskLog/Serolog.Sinks.ConductorTaskLog.csproj'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/Serilog.Sinks.ConductorTaskLog/Serolog.Sinks.ConductorTaskLog.csproj'
+    versioningScheme: 'off'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
