@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9E1F3D14-E965-428A-B3AD-90111AFE9895}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serolog.Sinks.ConductorTaskLog", "src\Serilog.Sinks.ConductorTaskLog\Serolog.Sinks.ConductorTaskLog.csproj", "{BF9B94CD-833F-400F-937F-909B414BADD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.ConductorTaskLog", "src\Serilog.Sinks.ConductorTaskLog\Serilog.Sinks.ConductorTaskLog.csproj", "{BF9B94CD-833F-400F-937F-909B414BADD1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.ConductorTaskLog.Sample", "sample\Serilog.Sinks.ConductorTaskLog.Sample\Serilog.Sinks.ConductorTaskLog.Sample.csproj", "{DE3749E7-7439-4FAA-972A-A071C76561EF}"
 EndProject
