@@ -24,3 +24,8 @@ steps:
     command: 'pack'
     packagesToPack: 'src/Serilog.Sinks.ConductorTaskLog/Serilog.Sinks.ConductorTaskLog.csproj'
     versioningScheme: 'off'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'sink'
+    publishLocation: 'Container'
