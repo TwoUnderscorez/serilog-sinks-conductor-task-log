@@ -1,4 +1,4 @@
-# Serilog.Sinks.ConductorTaskLog
+# <img src="https://raw.githubusercontent.com/TwoUnderscorez/serilog-sinks-conductor-task-log/init_sln/images/icon.png" width="30" height="30" /> Serilog.Sinks.ConductorTaskLog
 
 A serilog sink that sends task logs to [Netflix Conductor](https://github.com/Netflix/conductor).
 
