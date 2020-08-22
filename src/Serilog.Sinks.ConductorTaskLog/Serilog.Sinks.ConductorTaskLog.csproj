@@ -20,7 +20,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Authors>TwoUnderscorez</Authors>
     <Copyright>Copyright (c) 2020, TwoUnderscorez; All rights reserved.</Copyright>
-
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.9.0" />
