@@ -12,6 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Serilog.Sinks.ConductorTaskLog\Serolog.Sinks.ConductorTaskLog.csproj" />
+    <ProjectReference Include="..\..\src\Serilog.Sinks.ConductorTaskLog\Serilog.Sinks.ConductorTaskLog.csproj" />
   </ItemGroup>
 </Project>
