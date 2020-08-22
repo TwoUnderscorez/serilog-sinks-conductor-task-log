@@ -40,7 +40,7 @@ A serilog sink that sends task logs to [Netflix Conductor](https://github.com/Ne
    ```csharp
    Log.Logger = new LoggerConfiguration()
        ...
-       .WriteTo.ConductorTaskLog("http://localhost:8080/api") // <-- Add the sink
+       .WriteTo.ConductorTaskLog("http://localhost:8080/api/") // <-- Add the sink
        .Enrich.FromLogContext() // <-- Also add this enricher
        .CreateLogger();
    ```
