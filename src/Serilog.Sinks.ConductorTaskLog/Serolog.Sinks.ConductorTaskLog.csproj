@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <NoWarn>NU5048</NoWarn>
     <Description>Send Serilog events to Netflix Conductor</Description>
     <VersionPrefix>0.0.1</VersionPrefix>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,7 +11,7 @@
     <PackageTags>serilog;sink;netflix;conductor</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/TwoUnderscorez/serilog-sinks-conductor-task-log/init_sln/images/icon.png</PackageIconUrl>
     <PackageProjectUrl>http://serilog.net</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/TwoUnderscorez/serilog-sinks-conductor-task-log/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicense>LICENSE</PackageLicense>
     <RepositoryUrl>https://github.com/TwoUnderscorez/serilog-sinks-conductor-task-log</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
