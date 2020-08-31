@@ -28,9 +28,13 @@ A serilog sink that sends task logs to [Netflix Conductor](https://github.com/Ne
 
    The sink will get the connection string to the Conductor from conductor-dotnet-client's configuration.
 
-3. Add this line at the start of your `Execute` method to let the sink know the taskId.
+3. Add the using
    ```csharp
-   using var _ = (LogContext.PushProperty("ConductorTaskId", task.TaskId));
+   using Serilog.Sinks.ConductorTaskLog.Extensions;
+   ```
+   The add this line at the start of your `Execute` method to let the sink know the taskId.
+   ```csharp
+   using var _ = task.LogScope();
    ```
 
 #### With something else
@@ -47,12 +51,14 @@ A serilog sink that sends task logs to [Netflix Conductor](https://github.com/Ne
 
 2. Add this line at the start of your any method to log all events from that method
    ```csharp
-   using var _ = (LogContext.PushProperty("ConductorTaskId", "TaskId"));
+   using Serilog.Sinks.ConductorTaskLog;
+
+   using var _ = TaskLog.LogScope("taskId");
    ```
    or like so to only log a few lines to the conductor
    ```csharp
    Log.Information("Not logging to Netflix Conductor");
-   using (LogContext.PushProperty("ConductorTaskId", "TaskId"))
+   using (TaskLog.LogScope("taskId"))
    {
        Log.Information("Log sent to Netflix Conductor");
    }

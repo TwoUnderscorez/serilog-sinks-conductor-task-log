@@ -1,10 +1,10 @@
 ﻿{
-  "profiles": {
-    "Serilog.Sinks.ConductorTaskLog.Sample": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
-      }
+    "profiles": {
+        "Serilog.Sinks.ConductorTaskLog.Sample": {
+            "commandName": "Project",
+            "environmentVariables": {
+                "DOTNET_ENVIRONMENT": "Development"
+            }
+        }
     }
-  }
 }

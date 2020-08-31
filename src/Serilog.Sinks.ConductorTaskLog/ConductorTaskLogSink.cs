@@ -1,24 +1,23 @@
-﻿using Serilog.Core;
-using Serilog.Events;
-using System;
+﻿using System;
 using System.Net.Http;
-using Microsoft.Extensions.DependencyInjection;
 using ConductorDotnetClient.Swagger.Api;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Serilog.Core;
+using Serilog.Events;
 
 namespace Serilog.Sinks.ConductorTaskLog
 {
     /// <summary>
-    /// A sink for sending log events to Netflix Conductor
+    ///     A sink for sending log events to Netflix Conductor
     /// </summary>
     public class ConductorTaskLogSink : ILogEventSink
     {
-        private readonly IFormatProvider _formatProvider;
         private static IConductorRestClient _conductorClient;
         private static IServiceCollection _serviceCollection;
+        private readonly IFormatProvider _formatProvider;
 
         /// <summary>
-        /// Initialize a new instance of ConductorTaskLogSink
+        ///     Initialize a new instance of ConductorTaskLogSink
         /// </summary>
         /// <param name="formatProvider"></param>
         public ConductorTaskLogSink(IFormatProvider formatProvider)
@@ -27,8 +26,8 @@ namespace Serilog.Sinks.ConductorTaskLog
         }
 
         /// <summary>
-        /// Initialize a new instance of ConductorTaskLogSink and explicitally specify 
-        /// the url to Netflix Conductor
+        ///     Initialize a new instance of ConductorTaskLogSink and explicitally specify
+        ///     the url to Netflix Conductor
         /// </summary>
         /// <param name="formatProvider"></param>
         /// <param name="conductorUrl">The url to Netflix Conductor ending with /api/</param>
@@ -46,7 +45,8 @@ namespace Serilog.Sinks.ConductorTaskLog
         /// <inheritdoc />
         public async void Emit(LogEvent logEvent)
         {
-            if ((_conductorClient ??= _serviceCollection?.BuildServiceProvider()?.GetService<IConductorRestClient>()) is null)
+            if ((_conductorClient ??=
+                _serviceCollection?.BuildServiceProvider()?.GetService<IConductorRestClient>()) is null)
                 return;
             var level = logEvent.Level switch
             {
@@ -66,8 +66,8 @@ namespace Serilog.Sinks.ConductorTaskLog
         }
 
         /// <summary>
-        /// Configure the ConductorTaskLogSink to use the url provided when 
-        /// configuring ConductorDotnetClient
+        ///     Configure the ConductorTaskLogSink to use the url provided when
+        ///     configuring ConductorDotnetClient
         /// </summary>
         /// <param name="services">A service collection with ConductorDotnetClient configured eventually</param>
         public static void ConfigureConductorClient(IServiceCollection services)
