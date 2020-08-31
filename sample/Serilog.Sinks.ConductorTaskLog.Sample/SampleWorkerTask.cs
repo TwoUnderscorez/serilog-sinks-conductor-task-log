@@ -1,10 +1,10 @@
-﻿using ConductorDotnetClient.Interfaces;
-using ConductorDotnetClient.Swagger.Api;
+﻿using System.Threading.Tasks;
 using ConductorDotnetClient.Extensions;
-using System.Threading.Tasks;
+using ConductorDotnetClient.Interfaces;
+using ConductorDotnetClient.Swagger.Api;
+using Serilog.Sinks.ConductorTaskLog.Extensions;
 using ConductorTask = ConductorDotnetClient.Swagger.Api.Task;
 using Task = System.Threading.Tasks.Task;
-using Serilog.Sinks.ConductorTaskLog.Extensions;
 
 namespace Serilog.Sinks.ConductorTaskLog.Sample
 {

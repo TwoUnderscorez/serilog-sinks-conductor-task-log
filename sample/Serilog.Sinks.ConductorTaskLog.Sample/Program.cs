@@ -1,15 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ConductorDotnetClient;
 using ConductorDotnetClient.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Serilog.Sinks.ConductorTaskLog.Extensions;
-using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.ConductorTaskLog.Extensions;
 
 namespace Serilog.Sinks.ConductorTaskLog.Sample
 {
@@ -40,8 +35,9 @@ namespace Serilog.Sinks.ConductorTaskLog.Sample
             }
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
                     services
@@ -57,5 +53,6 @@ namespace Serilog.Sinks.ConductorTaskLog.Sample
                         })
                         .EnableConductorTaskLog();
                 });
+        }
     }
 }
