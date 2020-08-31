@@ -2,7 +2,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Configuration;
 
-namespace Serilog.Sinks.ConductorTaskLog
+namespace Serilog.Sinks.ConductorTaskLog.Extensions
 {
     /// <summary>
     /// ConductorTaskLog extension

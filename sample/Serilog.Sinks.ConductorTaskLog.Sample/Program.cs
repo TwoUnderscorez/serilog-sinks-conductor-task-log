@@ -7,7 +7,7 @@ using ConductorDotnetClient.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Serilog.Sinks.ConductorTaskLog;
+using Serilog.Sinks.ConductorTaskLog.Extensions;
 using Serilog;
 using Serilog.Events;
 
