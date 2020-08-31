@@ -2,12 +2,11 @@
   <PropertyGroup>
     <NoWarn>NU5048;NU5125</NoWarn>
     <Description>Send Serilog events to Netflix Conductor</Description>
-    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionPrefix>0.0.3</VersionPrefix>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <SignAssembly>true</SignAssembly>
-    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <SignAssembly>false</SignAssembly>
     <PackageTags>serilog;sink;netflix;conductor</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/TwoUnderscorez/serilog-sinks-conductor-task-log/init_sln/images/icon.png</PackageIconUrl>
     <PackageProjectUrl>http://serilog.net</PackageProjectUrl>
@@ -20,7 +19,6 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Authors>TwoUnderscorez</Authors>
     <Copyright>Copyright (c) 2020, TwoUnderscorez; All rights reserved.</Copyright>
-
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.9.0" />
