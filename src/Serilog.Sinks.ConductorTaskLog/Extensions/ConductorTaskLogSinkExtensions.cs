@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using ConductorTask = ConductorDotnetClient.Swagger.Api.Task;
 using Serilog.Configuration;
 
 namespace Serilog.Sinks.ConductorTaskLog.Extensions
@@ -48,6 +49,16 @@ namespace Serilog.Sinks.ConductorTaskLog.Extensions
             ConductorTaskLogSink.ConfigureConductorClient(services);
 
             return services;
+        }
+
+        /// <summary>
+        /// A wrapper for <see cref="TaskLog.LogScope"/> 
+        /// </summary>
+        /// <param name="task">this</param>
+        /// <returns></returns>        
+        public static IDisposable LogScope(this ConductorTask task)
+        {
+            return TaskLog.LogScope(task.TaskId);
         }
     }
 }

@@ -4,8 +4,7 @@ using ConductorDotnetClient.Extensions;
 using System.Threading.Tasks;
 using ConductorTask = ConductorDotnetClient.Swagger.Api.Task;
 using Task = System.Threading.Tasks.Task;
-using Serilog;
-using Serilog.Context;
+using Serilog.Sinks.ConductorTaskLog.Extensions;
 
 namespace Serilog.Sinks.ConductorTaskLog.Sample
 {
@@ -17,7 +16,7 @@ namespace Serilog.Sinks.ConductorTaskLog.Sample
 
         public Task<TaskResult> Execute(ConductorTask task)
         {
-            using var _ = (LogContext.PushProperty("ConductorTaskId", task.TaskId));
+            using var _ = task.LogScope();
             Log.Information("Doing some work");
             return Task.FromResult(task.Completed());
         }
