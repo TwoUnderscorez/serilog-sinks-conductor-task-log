@@ -4,7 +4,6 @@ using System;
 using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
 using ConductorDotnetClient.Swagger.Api;
-using Microsoft.Extensions.Logging;
 
 namespace Serilog.Sinks.ConductorTaskLog
 {
