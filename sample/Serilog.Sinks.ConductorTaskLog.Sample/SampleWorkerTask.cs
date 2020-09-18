@@ -10,7 +10,7 @@ namespace Serilog.Sinks.ConductorTaskLog.Sample
 {
     public class SampleWorkerTask : IWorkflowTask
     {
-        public string TaskType { get; } = "test_task";
+        public string TaskType { get; } = "task_5";
 
         public int? Priority { get; } = 1;
 
