@@ -14,9 +14,8 @@ namespace Serilog.Sinks.ConductorTaskLog.Sample
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
-                .WriteTo.ConductorTaskLog()
+                .WriteTo.ConductorTaskLog("http://localhost:8080/api/")
                 .WriteTo.Console()
                 .CreateLogger();
 
@@ -50,8 +49,7 @@ namespace Serilog.Sinks.ConductorTaskLog.Sample
                             MaxSleepInterval = 15_000,
                             SleepInterval = 1_000,
                             ServerUrl = new Uri("http://localhost:8080/api/")
-                        })
-                        .EnableConductorTaskLog();
+                        });
                 });
         }
     }

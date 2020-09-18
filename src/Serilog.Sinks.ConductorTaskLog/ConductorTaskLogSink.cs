@@ -1,9 +1,10 @@
-﻿using System;
+using System.Text;
+using System;
 using System.Net.Http;
 using ConductorDotnetClient.Swagger.Api;
-using Microsoft.Extensions.DependencyInjection;
-using Serilog.Core;
+using Microsoft.Extensions.Logging;
 using Serilog.Events;
+using Serilog.Core;
 
 namespace Serilog.Sinks.ConductorTaskLog
 {
@@ -12,18 +13,9 @@ namespace Serilog.Sinks.ConductorTaskLog
     /// </summary>
     public class ConductorTaskLogSink : ILogEventSink
     {
-        private static IConductorRestClient _conductorClient;
-        private static IServiceCollection _serviceCollection;
+        private static HttpClient _logClient;
         private readonly IFormatProvider _formatProvider;
-
-        /// <summary>
-        ///     Initialize a new instance of ConductorTaskLogSink
-        /// </summary>
-        /// <param name="formatProvider"></param>
-        public ConductorTaskLogSink(IFormatProvider formatProvider)
-        {
-            _formatProvider = formatProvider;
-        }
+        private readonly string _logEndpoint = "tasks/{0}/log";
 
         /// <summary>
         ///     Initialize a new instance of ConductorTaskLogSink and explicitally specify
@@ -32,23 +24,31 @@ namespace Serilog.Sinks.ConductorTaskLog
         /// <param name="formatProvider"></param>
         /// <param name="conductorUrl">The url to Netflix Conductor ending with /api/</param>
         /// <returns></returns>
-        public ConductorTaskLogSink(IFormatProvider formatProvider, string conductorUrl) : this(formatProvider)
+        public ConductorTaskLogSink(IFormatProvider formatProvider, string conductorUrl)
         {
-            _conductorClient = new CustomConductorRestClient(
-                new HttpClient
-                {
-                    BaseAddress = new Uri(conductorUrl)
-                }
-            );
+            _formatProvider = formatProvider;
+            _logClient = new HttpClient
+            {
+                BaseAddress = new Uri(conductorUrl)
+            };
         }
 
         /// <inheritdoc />
         public async void Emit(LogEvent logEvent)
         {
-            if ((_conductorClient ??=
-                _serviceCollection?.BuildServiceProvider()?.GetService<IConductorRestClient>()) is null)
-                return;
-            var level = logEvent.Level switch
+            HttpResponseMessage r;
+            if (logEvent.Properties.TryGetValue("ConductorTaskId", out var taskId))
+                r = await _logClient.PostAsync(
+                    string.Format(_logEndpoint, taskId.ToString().Trim('"')),
+                    new StringContent(
+                        $"[{GetLevel(logEvent.Level)}] : {logEvent.RenderMessage(_formatProvider)}",
+                        Encoding.UTF8,
+                        "application/json"
+                    )
+                );
+        }
+
+        private string GetLevel(LogEventLevel level) => level switch
             {
                 LogEventLevel.Fatal => "FTL",
                 LogEventLevel.Error => "ERR",
@@ -56,23 +56,7 @@ namespace Serilog.Sinks.ConductorTaskLog
                 LogEventLevel.Information => "INF",
                 LogEventLevel.Debug => "DBG",
                 LogEventLevel.Verbose => "VER",
-                _ => throw new ArgumentOutOfRangeException($"Invalid {nameof(LogEventLevel)}")
+                _ => "???"
             };
-            if (logEvent.Properties.TryGetValue("ConductorTaskId", out var taskId))
-                await _conductorClient.LogAsync(
-                    taskId.ToString().Trim('"'),
-                    $"[{level}] : {logEvent.RenderMessage(_formatProvider)}"
-                ).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        ///     Configure the ConductorTaskLogSink to use the url provided when
-        ///     configuring ConductorDotnetClient
-        /// </summary>
-        /// <param name="services">A service collection with ConductorDotnetClient configured eventually</param>
-        public static void ConfigureConductorClient(IServiceCollection services)
-        {
-            _serviceCollection = services;
-        }
     }
 }
