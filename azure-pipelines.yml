@@ -10,12 +10,16 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
 - task: VSBuild@1
   inputs:
     solution: '**\*.sln'
     vsVersion: '16.0'
     clean: true
-    restoreNugetPackages: true
 - task: VSTest@2
   inputs:
     testSelector: 'testAssemblies'
