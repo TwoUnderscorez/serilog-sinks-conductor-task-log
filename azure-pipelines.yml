@@ -10,19 +10,25 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: DotNetCoreCLI@2
+- task: VSBuild@1
   inputs:
-    command: 'restore'
-    projects: 'src/Serilog.Sinks.ConductorTaskLog/Serilog.Sinks.ConductorTaskLog.csproj'
-    feedsToUse: 'select'
-- task: DotNetCoreCLI@2
+    solution: '**\*.sln'
+    vsVersion: '16.0'
+    clean: true
+    restoreNugetPackages: true
+- task: VSTest@2
   inputs:
-    command: 'build'
-    projects: 'src/Serilog.Sinks.ConductorTaskLog/Serilog.Sinks.ConductorTaskLog.csproj'
-- task: DotNetCoreCLI@2
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    codeCoverageEnabled: true
+- task: NuGetCommand@2
   inputs:
     command: 'pack'
-    packagesToPack: 'src/Serilog.Sinks.ConductorTaskLog/Serilog.Sinks.ConductorTaskLog.csproj'
+    packagesToPack: '**/CSRedis.csproj'
     versioningScheme: 'off'
 - task: PublishBuildArtifacts@1
   inputs:
